@@ -25,6 +25,9 @@
 Выполните команды:
 ```shell
 git clone https://github.com/Yurgers/tinkoff_invest_robot
+cd tinkoff_invest_robot/
+python3.10 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 

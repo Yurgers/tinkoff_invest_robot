@@ -2,8 +2,10 @@ from flask import Flask, jsonify, render_template
 from flask import request
 from loguru import logger
 
-from algotrading import get_account, glossary
-from algotrading import get_shares
+from settings import settings
+
+from src.algotrading import get_account, glossary
+from src.algotrading import get_shares
 from src.algotrading import _sandbox_accounts
 from src.strategy.macd import macd_test, macd_sandbox_run
 
@@ -126,4 +128,4 @@ def show_test():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8000, debug=True)
+    app.run(host=settings.flask_run_host, port=settings.flask_run_port, debug=True)

@@ -1,6 +1,6 @@
 from tinkoff.invest import Quotation, Client
 
-from src.settings import settings
+from settings import settings
 
 
 def to_float(quotation: Quotation) -> float:

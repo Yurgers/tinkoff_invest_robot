@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     api_token_sandbox: str | None
     app_name: str = 'yurgers'
 
+    flask_run_host: str = "127.0.0.1"
+    flask_run_port: int = 8000
 
 try:
     settings = Settings()
