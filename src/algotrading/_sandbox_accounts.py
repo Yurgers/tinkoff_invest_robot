@@ -51,7 +51,6 @@ def open():
 def get_sandbox_positions(client, account_id):
     positions = {}
     sandbox_positions = client.sandbox.get_sandbox_positions(account_id=account_id)
-    print(sandbox_positions)
     for val in ['money', 'blocked']:
         positions[val] = []
         for money in sandbox_positions.__getattribute__(val):
