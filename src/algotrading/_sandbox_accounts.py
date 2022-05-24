@@ -74,7 +74,6 @@ def get():
         sandbox_accounts = get_sandbox_accounts(client)
         for account_id in sandbox_accounts:
             positions = get_sandbox_positions(client, account_id)
-            print(positions)
 
             sandbox_accounts[account_id]['positions'] = positions
 
