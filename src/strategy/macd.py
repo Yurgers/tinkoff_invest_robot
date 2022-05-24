@@ -62,6 +62,7 @@ def macd_sandbox_run(data: dict):
     instrument_data = get_instrument_by(data['figi'])
     api_client = api_client_configure()
     candles = {}
+    positions = False
 
     with api_client as client:
         for marketdata in client.market_data_stream.market_data_stream(
@@ -81,7 +82,7 @@ def macd_sandbox_run(data: dict):
                                                 )
                 df['trading_signal'] = np.where(df['macd'] > df['macd_signal'], 1, 0)
 
-                positions = False
+
                 if df.iloc[-1]['trading_signal'] and not positions:
                     logger.info(f"Покупаем {marketdata.candle.time} по {to_float(marketdata.candle.close)}")
                     post_sandbox_order(client, data['account_id'], data['figi'], 'buy')
