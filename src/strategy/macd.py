@@ -98,7 +98,6 @@ def macd_sandbox_run(data: dict):
             logger.trace(f"\n{marketdata}")
 
 
-
 if __name__ == "__main__":
     data = {'account_id': 'f10a6f40-711b-4a0a-855c-6bf43b7eba77', 'figi': 'BBG004730N88', 'window_slow': 26,
             'window_fast': 12, 'window_sign': 9}
