@@ -4,6 +4,7 @@ from ta.trend import macd, macd_signal
 from pandas import DataFrame
 import numpy as np
 
+from src.algotrading._sandbox_accounts import post_sandbox_order
 from src.algotrading.get_candles import get_all_candles, request_iterator
 from src.algotrading.instruments_service import get_instrument_by
 from src.algotrading.utils import api_client_configure, to_float
@@ -82,16 +83,19 @@ def macd_sandbox_run(data: dict):
 
                 positions = False
                 if df.iloc[-1]['trading_signal'] and not positions:
-                    logger.info(f"Покупаем {marketdata.candle.time} по {marketdata.candle.close}")
+                    logger.info(f"Покупаем {marketdata.candle.time} по {to_float(marketdata.candle.close)}")
+                    post_sandbox_order(client, data['account_id'], data['figi'], 'buy')
                     positions = True
 
                 elif not df.iloc[-1]['trading_signal'] and positions:
-                    logger.info(f"Продаем {marketdata.candle.time} по {marketdata.candle.close}")
+                    logger.info(f"Продаем {marketdata.candle.time} по {to_float(marketdata.candle.close)}")
                     positions = False
+                    post_sandbox_order(client, data['account_id'], data['figi'], 'sell')
 
                 else:
                     logger.trace(f"\n{df.tail(5)}")
 
+            logger.trace(f"\n{marketdata}")
 
 
 

@@ -1,6 +1,7 @@
-from tinkoff.invest import MoneyValue
+from tinkoff.invest import MoneyValue, OrderDirection, OrderType
 
 from loguru import logger
+from tinkoff.invest.utils import now
 
 from src.algotrading.utils import to_float
 from src.algotrading import utils
@@ -69,6 +70,28 @@ def get():
             sandbox_accounts[account_id]['positions'] = positions
 
     return sandbox_accounts
+
+
+def post_sandbox_order(client, account_id: str, figi: str, direct: str, count_lot: int = 1):
+    if direct == 'buy':
+        direction = OrderDirection.ORDER_DIRECTION_BUY
+    elif direct == 'sell':
+        direction = OrderDirection.ORDER_DIRECTION_SELL
+    else:
+        logger.warning('')
+        raise ValueError(f'Неправельный парамерт {direct=}')
+
+
+    order = client.sandbox.post_sandbox_order(
+        account_id=account_id,
+        figi=figi,
+        quantity=count_lot,
+        order_id=str(now().timestamp()),
+        direction=direction,
+        order_type=OrderType.ORDER_TYPE_MARKET
+    )
+
+    return order
 
 
 if __name__ == "__main__":
