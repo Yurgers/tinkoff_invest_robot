@@ -89,7 +89,8 @@ def sandbox_payin():
 @app.route("/stratgy", methods=['GET'])
 def show_stratgy():
     sandbox_accounts = _sandbox_accounts.get()
-    return render_template("stratgy.html", sandbox_accounts=sandbox_accounts)
+    return render_template("stratgy.html", sandbox_accounts=sandbox_accounts,
+                                           timeframe=glossary.timeframe)
 
 
 @app.route("/stratgy/test", methods=['POST'])
@@ -98,6 +99,7 @@ def post_stratgy_test():
     data['window_slow'] = int(data['window_slow'])
     data['window_fast'] = int(data['window_fast'])
     data['window_sign'] = int(data['window_sign'])
+    data['timeframe'] = int(data['timeframe'])
 
     result = macd_test(data)
 

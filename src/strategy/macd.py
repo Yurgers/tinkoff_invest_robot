@@ -29,7 +29,7 @@ def macd_test(data: dict) -> int:
 
     with api_client as client:
 
-        candles = get_all_candles(client, data['figi'], 7)
+        candles = get_all_candles(client, data['figi'], 7, data['timeframe'])
         df = create_df(candles)
 
         df['macd'] = macd(close=df['close'], window_slow=data['window_slow'], window_fast=data['window_fast'])

@@ -45,3 +45,12 @@ trading_status = {
     "SECURITY_TRADING_STATUS_DEALER_BREAK_IN_TRADING": "Перерыв торговли в режиме внутренней ликвидности брокера",
     "SECURITY_TRADING_STATUS_DEALER_NOT_AVAILABLE_FOR_TRADING": "Недоступна торговля в режиме внутренней ликвидности брокера",
 }
+
+
+timeframe = {
+    1: "1 минута.",
+    2: "5 минут.",
+    3: "15 минут.",
+    4: "1 час.",
+    5: "1 день."
+}

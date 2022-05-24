@@ -13,11 +13,11 @@ from tinkoff.invest import (
 from tinkoff.invest.utils import now
 
 
-def get_all_candles(client, figi, periud_day):
+def get_all_candles(client, figi, periud_day, timeframe):
     candles = client.get_all_candles(
         figi=figi,
         from_=now() - timedelta(days=periud_day),
-        interval=CandleInterval.CANDLE_INTERVAL_1_MIN,
+        interval=timeframe,
     )
 
     return candles
