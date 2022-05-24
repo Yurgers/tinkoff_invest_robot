@@ -3,6 +3,7 @@ from tinkoff.invest import MoneyValue, OrderDirection, OrderType
 from loguru import logger
 from tinkoff.invest.utils import now
 
+from src.algotrading.instruments_service import get_instrument_by
 from src.algotrading.utils import to_float
 from src.algotrading import utils
 
@@ -50,12 +51,20 @@ def open():
 def get_sandbox_positions(client, account_id):
     positions = {}
     sandbox_positions = client.sandbox.get_sandbox_positions(account_id=account_id)
+    print(sandbox_positions)
     for val in ['money', 'blocked']:
         positions[val] = []
         for money in sandbox_positions.__getattribute__(val):
-            positions[val].append({"currency": money.currency,
-                                   "val": to_float(money)
+            positions[val].append({"name": money.currency,
+                                   "balance": to_float(money)
                                    })
+
+    positions['securities'] = []
+    for position in sandbox_positions.securities:
+        positions['securities'].append({"name": get_instrument_by(position.figi)['name'],
+                                        "balance": position.balance,
+                                        "blocked": position.blocked
+                                        })
 
     return positions
 
@@ -66,6 +75,7 @@ def get():
         sandbox_accounts = get_sandbox_accounts(client)
         for account_id in sandbox_accounts:
             positions = get_sandbox_positions(client, account_id)
+            print(positions)
 
             sandbox_accounts[account_id]['positions'] = positions
 
@@ -80,7 +90,6 @@ def post_sandbox_order(client, account_id: str, figi: str, direct: str, count_lo
     else:
         logger.warning('')
         raise ValueError(f'Неправельный парамерт {direct=}')
-
 
     order = client.sandbox.post_sandbox_order(
         account_id=account_id,

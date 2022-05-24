@@ -41,14 +41,15 @@
                     <h5>список позиций по счёту:</h5>
                     {% for key, values in account.positions.items() %}
                         {% if values %}
-                            {{key}}
+                            <br>
+                            {{key}}:
                             {% for value in values %}
                                 <div class="row">
                                     <div class="col-sm fw-bold">
-                                        {{ value.currency }}
+                                        {{ value.name }}
                                     </div>
                                     <div class="col-sm">
-                                        {{ value.val }}
+                                        {{ value.balance }}
                                     </div>
                                 </div>
                             {% endfor %}

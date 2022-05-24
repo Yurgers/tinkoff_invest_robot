@@ -9,7 +9,8 @@ def get_instrument_by(figi: str) -> dict:
     with api_client as client:
         instrument = client.instruments.get_instrument_by(id_type=InstrumentIdType.INSTRUMENT_ID_TYPE_FIGI, id=figi)
 
-    return {'lot': instrument.instrument.lot,
+    return {'name': instrument.instrument.name,
+            'lot': instrument.instrument.lot,
             'currency': instrument.instrument.currency,
             'trading_status': {
                 'name': instrument.instrument.trading_status.name,
