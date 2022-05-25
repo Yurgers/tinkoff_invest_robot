@@ -66,7 +66,7 @@ def macd_sandbox_run(data: dict):
 
     with api_client as client:
         for marketdata in client.market_data_stream.market_data_stream(
-                request_iterator(data['figi'])
+                request_iterator(data['figi'], data['timeframe'])
         ):
 
             if marketdata.candle:

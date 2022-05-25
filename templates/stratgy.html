@@ -52,10 +52,12 @@
                     {% if key < 3 %}
                         <option value="{{ key }}">{{ val }}</option>
                     {% else %}
-                        <option value="{{ key }}" disabled>{{ val }}      -== Недоступно для запуска ==-</option>
+                        <option value="{{ key }}" color="$yellow-300">{{ val }}      -== Недоступно для запуска ==-</option>
                     {% endif %}
                 {% endfor %}
         </select>
+        <small id="timeHelp" class="form-text text-muted">Запуск в SandBox будет производится максимим с 5 минутным интервалом свечей</small>
+
     </div>
     <div class="col-12">
     </div>

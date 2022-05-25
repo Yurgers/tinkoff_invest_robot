@@ -12,6 +12,8 @@ from tinkoff.invest import (
 
 from tinkoff.invest.utils import now
 
+from src.algotrading import glossary
+
 
 def get_all_candles(client, figi, periud_day, timeframe):
     candles = client.get_all_candles(
@@ -23,14 +25,20 @@ def get_all_candles(client, figi, periud_day, timeframe):
     return candles
 
 
-def request_iterator(figi):
+def request_iterator(figi, timeframe):
+    print(timeframe)
+    if timeframe == 1:
+        interval = SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE
+    else:
+        interval = SubscriptionInterval.SUBSCRIPTION_INTERVAL_FIVE_MINUTES
+
     yield MarketDataRequest(
         subscribe_candles_request=SubscribeCandlesRequest(
             subscription_action=SubscriptionAction.SUBSCRIPTION_ACTION_SUBSCRIBE,
             instruments=[
                 CandleInstrument(
                     figi=figi,
-                    interval=SubscriptionInterval.SUBSCRIPTION_INTERVAL_ONE_MINUTE,
+                    interval=interval,
                 )
             ],
         )

@@ -112,6 +112,7 @@ def post_stratgy_sandbox():
     data['window_slow'] = int(data['window_slow'])
     data['window_fast'] = int(data['window_fast'])
     data['window_sign'] = int(data['window_sign'])
+    data['timeframe'] = int(data['timeframe'])
 
     result = macd_sandbox_run(data)
 

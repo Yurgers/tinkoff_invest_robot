@@ -54,3 +54,9 @@ timeframe = {
     4: "1 час.",
     5: "1 день."
 }
+
+
+SUBSCRIPTION_INTERVAL = {
+    1: "SUBSCRIPTION_INTERVAL_ONE_MINUTE",
+    2: "SUBSCRIPTION_INTERVAL_FIVE_MINUTES"
+}
